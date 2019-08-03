@@ -1,13 +1,13 @@
 import React from 'react';
 import { TouchableHighlight, Text } from 'react-native';
 
-const CalculatorButton = ({ onPress, underlayColor, styles, textToShow}) => (
+const CalculatorButton = ({ onPress, underlayColor, styles, number}) => (
   <TouchableHighlight
-    onPress={onPress}
+    onPress={() => onPress(number)}
     underlayColor={underlayColor}
     style={styles.numberContainer}
   >
-    <Text style={styles.number}>{textToShow}</Text>
+    <Text style={styles.number}>{number}</Text>
   </TouchableHighlight>
 );
 

@@ -3,7 +3,7 @@ import { TouchableHighlight, Text } from 'react-native';
 
 const OperationsButton = ({ onPress, underlayColor, styles, operation}) => (
   <TouchableHighlight
-    onPress={onPress}
+    onPress={() => onPress(operation)}
     underlayColor={underlayColor}
     style={styles.operationContainer}
   >
