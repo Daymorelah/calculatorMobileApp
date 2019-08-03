@@ -5,15 +5,19 @@ import OperationsButton from './OperationsButton';
 import styles from './styles';
 
 class App extends Component {
-  state = {
-    numbersTyped: [],
-    numbersOnCalculator: ['1','2','3','4','5','6','7','8','9','.','0','='],
-    operations: ['DEL', '/', 'X', '-', '+'],
+  static initialState = () => ({
     firstArg: 0,
     secondArg: 0,
     tempArg: [],
     operation: null,
     result: 0,
+    numbersTyped: [],
+  });
+
+  state = {
+    numbersOnCalculator: ['1','2','3','4','5','6','7','8','9','.','0','='],
+    operations: ['DEL', '/', 'X', '-', '+'],
+    ...App.initialState(),
   };
 
   displayNumbers = (prevState, number) => ({
@@ -23,7 +27,7 @@ class App extends Component {
   handleNumberClicked = (number) => {
     if (number === '=') {
       const { firstArg, operation, tempArg, secondArg } = this.state;
-      const secondArgs = parseInt(tempArg.join(''), 10);
+      const secondArgs = parseFloat(tempArg.join(''));
       console.log('typeof 1st arg is ==> ', typeof (firstArg), firstArg);
       console.log('typeof 2nd arg is ==> ', typeof (secondArg), secondArg);
       let result = 0;
@@ -41,16 +45,29 @@ class App extends Component {
   }
 
   handleOperation = (operation) => {
-    this.setState((prevState) => {
-      const argToSet = (prevState.operation !== null) ? 'secondArg' : 'firstArg';
-
-      return({
-        ...this.displayNumbers(prevState, operation),
-        [argToSet]: parseInt(prevState.tempArg.join(''), 10),
-        operation: operation,
-        tempArg: [],
+    if (operation === 'DEL') {
+      this.setState((prevState) => {
+        prevState.numbersTyped.pop();
+        prevState.tempArg.pop();
+        return { numbersTyped: prevState.numbersTyped };
       });
-    });
+    } else {
+      this.setState((prevState) => {
+        const argToSet = (prevState.operation !== null) ? 'secondArg' : 'firstArg';
+        return({
+          ...this.displayNumbers(prevState, operation),
+          [argToSet]: parseFloat(prevState.tempArg.join('')),
+          operation: operation,
+          tempArg: [],
+        });
+      });
+    }
+  }
+
+  handleClearScreen = (operation) => {
+    if(operation === 'DEL') {
+      this.setState({ ...App.initialState() });
+    }
   }
 
   render() {
@@ -87,6 +104,7 @@ class App extends Component {
                   underlayColor='white'
                   styles={styles}
                   operation={operation}
+                  onLongPress={this.handleClearScreen}
                 />
               ))
             }
