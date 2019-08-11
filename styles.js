@@ -9,10 +9,23 @@ const styles = StyleSheet.create({
   calculation: {
     height: '20%',
   },
+  numbersTyped: {
+    fontSize: 45,
+    fontStyle: 'normal',
+    writingDirection: 'rtl',
+    letterSpacing: 0.5,
+    includeFontPadding: true,
+  },
   result: {
     color: 'black',
     backgroundColor: 'orange',
     height: '10%',
+  },
+  resultText: {
+    fontSize: 35,
+    writingDirection: 'rtl',
+    letterSpacing: 0.5,
+    includeFontPadding: true,
   },
   buttons: {
     backgroundColor: 'black',
