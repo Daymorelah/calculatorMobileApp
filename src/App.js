@@ -7,7 +7,7 @@ import styles from './styles';
 class App extends Component {
   static initialState = () => ({
     firstArg: 0,
-    hasPrevCalc: null,
+    hasPrevCalc: false,
     tempArg: [],
     operation: null,
     result: 0,
@@ -21,23 +21,24 @@ class App extends Component {
   };
 
   displayNumbers = (prevState, number) => ({
-    numbersTyped: [...prevState.numbersTyped, number ],
+    numbersTyped: prevState.hasPrevCalc ? number : [...prevState.numbersTyped, number ],
   });
 
   handleNumberClicked = (number) => {
     if (number === '=') {
-      const { firstArg, operation, tempArg, hasPrevCalc } = this.state;
+      const { firstArg, operation, tempArg } = this.state;
       const secondArgs = parseFloat(tempArg.join(''));
       let result = 0;
       if (operation === '+') result = (firstArg + secondArgs);
       if (operation === '/') result = (firstArg / secondArgs);
       if (operation === '-') result = (firstArg - secondArgs);
       if (operation === 'x') result = (firstArg * secondArgs);
-      this.setState({ result, operation: null, tempArg: [], hasPrevCalc: null });
+      this.setState({ result: result || 0, operation: null, tempArg: [], hasPrevCalc: true });
     } else {
       this.setState((prevState) => ({
         ...this.displayNumbers(prevState, number),
         tempArg: [...prevState.tempArg, number],
+        hasPrevCalc: false,
       }));
     }
   }
