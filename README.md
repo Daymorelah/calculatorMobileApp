@@ -14,7 +14,7 @@ A simple calculator mobile App built with react-native.
 * Android Vitual Device or an Android phone
 
 ## Screenshot
-<img src='./calc_app.gif'>
+<img src='./calc_app.gif' height="300" width="200">
 
 ## INSTALLATION
  * install [Andriod studio](https://developer.android.com/studio)
