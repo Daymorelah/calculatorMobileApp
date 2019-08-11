@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
-import CalculatorButton from './CalculatorButton';
-import OperationsButton from './OperationsButton';
+import CalculatorButton from './Components/Calculator/CalculatorButton';
+import OperationsButton from './Components/Calculator/OperationsButton';
 import styles from './styles';
 
 class App extends Component {
   static initialState = () => ({
     firstArg: 0,
-    secondArg: 0,
+    hasPrevCalc: null,
     tempArg: [],
     operation: null,
     result: 0,
@@ -26,14 +26,14 @@ class App extends Component {
 
   handleNumberClicked = (number) => {
     if (number === '=') {
-      const { firstArg, operation, tempArg, secondArg } = this.state;
+      const { firstArg, operation, tempArg, hasPrevCalc } = this.state;
       const secondArgs = parseFloat(tempArg.join(''));
       let result = 0;
       if (operation === '+') result = (firstArg + secondArgs);
       if (operation === '/') result = (firstArg / secondArgs);
       if (operation === '-') result = (firstArg - secondArgs);
       if (operation === 'x') result = (firstArg * secondArgs);
-      this.setState({ result, operation: null, tempArg: [], numbersTyped: [] });
+      this.setState({ result, operation: null, tempArg: [], hasPrevCalc: null });
     } else {
       this.setState((prevState) => ({
         ...this.displayNumbers(prevState, number),
@@ -69,11 +69,13 @@ class App extends Component {
   }
 
   render() {
-    const { numbersOnCalculator, operations, numbersTyped, result } = this.state;
+    const { numbersOnCalculator, operations, numbersTyped, result, hasPrevCalc } = this.state;
     return(
       <View style={styles.container}>
         <View style={styles.calculation}>
-          <Text style = {styles.numbersTyped}>{numbersTyped}</Text>
+          <Text style = {styles.numbersTyped}>
+            {(hasPrevCalc && numbersTyped) || (numbersTyped)}
+          </Text>
         </View>
         <View style={styles.result}>
           <Text style = {styles.resultText}>{result}</Text>
@@ -98,7 +100,7 @@ class App extends Component {
                 <OperationsButton
                   key={`operation-${index}`}
                   onPress={this.handleOperation}
-                  underlayColor='white'
+                  underlayColor='#e6e6fa'
                   styles={styles}
                   operation={operation}
                   onLongPress={this.handleClearScreen}

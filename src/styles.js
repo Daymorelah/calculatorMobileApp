@@ -8,24 +8,26 @@ const styles = StyleSheet.create({
   },
   calculation: {
     height: '20%',
+    backgroundColor: '#ffffff',
   },
   numbersTyped: {
     fontSize: 45,
-    fontStyle: 'normal',
-    writingDirection: 'rtl',
     letterSpacing: 0.5,
-    includeFontPadding: true,
+    color: 'steelblue',
+    textAlign: 'right',
+    paddingRight: 3,
+    paddingRight: 10,
   },
   result: {
-    color: 'black',
-    backgroundColor: 'orange',
+    backgroundColor: '#ffffff',
     height: '10%',
   },
   resultText: {
     fontSize: 35,
-    writingDirection: 'rtl',
+    textAlign: 'right',
     letterSpacing: 0.5,
-    includeFontPadding: true,
+    color: 'steelblue',
+    paddingRight: 10,
   },
   buttons: {
     backgroundColor: 'black',
