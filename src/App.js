@@ -4,7 +4,7 @@ import CalculatorButton from './Components/Calculator/CalculatorButton';
 import OperationsButton from './Components/Calculator/OperationsButton';
 import styles from './styles';
 
-class App extends Component {
+export class App extends Component {
   static initialState = () => ({
     firstArg: 0,
     hasPrevCalc: false,
