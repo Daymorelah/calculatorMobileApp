@@ -29,10 +29,10 @@ export class App extends Component {
       const { firstArg, operation, tempArg } = this.state;
       const secondArgs = parseFloat(tempArg.join(''));
       let result = 0;
-      if (operation === '+') result = (firstArg + secondArgs);
-      if (operation === '/') result = (firstArg / secondArgs);
-      if (operation === '-') result = (firstArg - secondArgs);
-      if (operation === 'x') result = (firstArg * secondArgs);
+      if (operation === '+') result = (firstArg + (secondArgs || 0 ));
+      if (operation === '/') result = (firstArg / (secondArgs || 1 ));
+      if (operation === '-') result = (firstArg - (secondArgs || 0 ));
+      if (operation === 'x') result = (firstArg * (secondArgs || 1 ));
       this.setState({ result: result || 0, operation: null, tempArg: [], hasPrevCalc: true });
     } else {
       this.setState((prevState) => ({
