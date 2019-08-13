@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/Daymorelah/calculatorMobileApp.svg?style=svg)](https://circleci.com/gh/Daymorelah/calculatorMobileApp)
+
 # calculatorMobileApp
 A simple calculator mobile App built with react-native.
 
@@ -15,6 +17,12 @@ A simple calculator mobile App built with react-native.
 
 ## Screenshot
 <img src='./calc_app.gif' height="300" width="200">
+
+## Getting started
+* Clone the repo and `cd` into the projects directory
+* Run `yarn install` to install projects dependencies
+* Run `yarn start` to start the app
+* Run `yarn test` to run tests for the app
 
 ## INSTALLATION
  * install [Andriod studio](https://developer.android.com/studio)
